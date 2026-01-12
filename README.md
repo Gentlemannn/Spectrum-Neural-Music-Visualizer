@@ -1,61 +1,70 @@
-# RtAudio
+# 🎧 Spectrum Neural Music Visualizer
 
-![Build Status](https://github.com/thestk/rtaudio/actions/workflows/ci.yml/badge.svg)
+**Spectrum Neural Music Visualizer** is a real-time audio visualization application written in **C++**, combining **live audio analysis**, **OpenGL rendering**, and **audio-reactive camera motion**.
 
-A set of C++ classes that provide a common API for realtime audio input/output across Linux (native ALSA, JACK, PulseAudio and OSS), Macintosh OS X (CoreAudio and JACK), and Windows (DirectSound, ASIO and WASAPI) operating systems.
+It transforms incoming audio (microphone or line input) into **abstract, cinematic 2D/3D visuals**, focusing on smooth motion, temporal persistence, and bass-driven dynamics rather than literal signal representation.
 
-By Gary P. Scavone, 2001-2023 (and many other developers!)
+This project is designed for **audiovisual experimentation**, **generative art**, and **live performance visuals**.
 
-This distribution of RtAudio contains the following:
+---
 
-- doc:      RtAudio documentation (see doc/html/index.html)
-- tests:    example RtAudio programs
-- include:  header and source files necessary for ASIO, DS & OSS compilation
-- tests/Windows: Visual C++ .net test program workspace and projects
+## ✨ Features
 
-## Overview
+- 🎙 Real-time audio input using **RtAudio**
+- 📊 Audio analysis (autocorrelation, FFT, low-frequency energy)
+- 🎨 OpenGL **2D / 3D** visualization (FreeGLUT)
+- 🌀 Temporal trails for smooth, persistent motion
+- 🥁 Robust **kick / bass detection** with noise rejection
+- 🎥 **Audio-reactive camera impulses** (cinematic push-in on kicks)
+- 🎚 Controlled, organic visuals (no per-frame random geometry)
+- ⌨️ Interactive keyboard controls
 
-RtAudio is a set of C++ classes that provides a common API (Application Programming Interface) for realtime audio input/output across Linux (native ALSA, JACK, PulseAudio and OSS), Macintosh OS X and Windows (DirectSound, ASIO and WASAPI) operating systems.  RtAudio significantly simplifies the process of interacting with computer audio hardware.  It was designed with the following objectives:
+---
 
-  - object-oriented C++ design
-  - simple, common API across all supported platforms
-  - only one source and one header file for easy inclusion in programming projects
-  - allow simultaneous multi-api support
-  - support dynamic connection of devices
-  - provide extensive audio device parameter control
-  - allow audio device capability probing
-  - automatic internal conversion for data format, channel number compensation, (de)interleaving, and byte-swapping
+## 🎯 Visual Philosophy
 
-RtAudio incorporates the concept of audio streams, which represent audio output (playback) and/or input (recording).  Available audio devices and their capabilities can be enumerated and then specified when opening a stream.  Where applicable, multiple API support can be compiled and a particular API specified when creating an RtAudio instance.  See the \ref apinotes section for information specific to each of the supported audio APIs.
+Unlike traditional spectrum analyzers, **Timeframe Visualizer** does not attempt to display audio data in a strictly scientific way.
 
-## Building
+Instead, it emphasizes:
 
-Several build systems are available.  These are:
+- coherent motion over randomness  
+- slow-evolving abstract structures  
+- bass-driven energy instead of full-band noise  
+- depth, scale, and cinematic timing  
 
-  - autotools (`./autogen.sh; make` from git, or `./configure; make` from tarball release)
-  - CMake (`mkdir build; cd build; ../cmake; make`)
-  - meson (`meson build; cd build; ninja`)
-  - vcpkg (`./bootstrap-vcpkg.sh; ./vcpkg integrate install; ./vcpkg install rtaudio`)
+The result is a **calm but expressive audiovisual experience**, inspired by generative art, experimental music visuals, and live VJ performances.
 
-See `install.txt` for more instructions about how to select the audio backend API.  By
-default all detected APIs will be enabled.
+---
 
-We recommend using the autotools-based build for packaging purposes.  Please note that
-RtAudio is designed as a single `.cpp` and `.h` file so that it is easy to copy directly
-into a project.  In that case you need to define the appropriate flags for the desired
-backend APIs.
+## 🛠 Tech Stack
 
-## FAQ
+- **Language:** C++17  
+- **Audio:** RtAudio  
+- **Graphics:** OpenGL (fixed pipeline)  
+- **Windowing / Input:** FreeGLUT  
+- **Platform:** Windows (WASAPI / DirectSound)
 
-### Why does audio only come to one ear when I choose 1-channel output?
+---
 
-RtAudio doesn't automatically turn 1-channel output into stereo output with copied values to two channels, since there may be cases when a user truly wants 1-channel behaviour.  If you want monophonic data to be projected to stereo output, open a 2-channel stream and copy the data to both channels in your audio stream callback.
+## 🎮 Controls
 
-## Further Reading
+- **Space** — Toggle 2D / 3D mode  
+- **Tab** — Toggle auxiliary display windows (3D mode)  
+- **L** — Toggle linear / logarithmic frequency scaling  
+- **Arrow Up / Down** — Zoom in / out  
+- **Q** — Quit application  
 
-For complete documentation on RtAudio, see the doc directory of the distribution or surf to http://www.music.mcgill.ca/~gary/rtaudio/.
+---
 
+## 🚀 Build (Windows / MSVC)
 
-## Legal and ethical:
+Example build command using MSVC:
 
-The RtAudio license is similar to the MIT License.  Please see [LICENSE](LICENSE).
+```bat
+cl /std:c++17 /O2 /EHsc ^
+TimeframeVisualizer.cpp ChannelBuffersHandler.cpp AutocorrHandler.cpp ^
+WindowedFftHandler.cpp FftBase.cpp LineDisplayHandler2D.cpp ^
+SpectrumDisplay.cpp AutocorrDisplay.cpp WaveformDisplay.cpp ^
+/I . /I ..\freeglut\include /I path\to\rtaudio ^
+/link ^
+rtaudio.lib freeglut.lib opengl32.lib glu32.lib winmm.lib dsound.lib ole32.lib uuid.lib user32.lib gdi32.lib
