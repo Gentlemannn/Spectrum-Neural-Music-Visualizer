@@ -5,6 +5,7 @@
 It transforms incoming audio (microphone or line input) into **abstract, cinematic 2D/3D visuals**, focusing on smooth motion, temporal persistence, and bass-driven dynamics rather than literal signal representation.
 
 This project is designed for **audiovisual experimentation**, **generative art**, and **live performance visuals**.
+It was mostly made by https://ccrma.stanford.edu/~seancoff/256a/hw3/ and got adapted by myself for windows version.
 
 ---
 
@@ -23,7 +24,7 @@ This project is designed for **audiovisual experimentation**, **generative art**
 
 ## 🎯 Visual Philosophy
 
-Unlike traditional spectrum analyzers, **Timeframe Visualizer** does not attempt to display audio data in a strictly scientific way.
+Unlike traditional spectrum analyzers, **Spectrum Neural Music Visualizer** does not attempt to display audio data in a strictly scientific way.
 
 Instead, it emphasizes:
 
