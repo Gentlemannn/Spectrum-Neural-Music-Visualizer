@@ -1,0 +1,8 @@
+#ifndef DEFS_H
+#define DEFS_H
+
+#define SAMPLE double
+#define MY_PI 3.14159265358979
+#define SRATE 44100
+
+#endif
